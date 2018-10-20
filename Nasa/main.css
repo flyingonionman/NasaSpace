@@ -26,7 +26,27 @@ p{
 	background-color:#FFFFFF;
 }
 
+#left #maps{
+	position: absolute;
+    background-color: grey;
+    width: 80%;
+    height: 71%;
+    margin-top: 4.5%;
+    margin-left: 6%;
+}
 
+#left #search{
+	
+}
+
+#left p{
+	color:black;
+}
+
+#left #sec3{
+	top:60%;	
+	
+}
 #right{
 	position:absolute;
 	height:100%;
@@ -88,6 +108,5 @@ p{
 	font-size:3em;
 	font-family: Kollektif, Cambria ,serif;
 }
-
 
 
