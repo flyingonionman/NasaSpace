@@ -34,7 +34,39 @@ function setUpClickListener(map) {
          ((coord.lng > 0) ? 'E' : 'W');
 
     alert('Clicked at ' + coord);
+
+    //parses through the data received to get t2m's temperature value
+    function reqListener () {
+        var now = new Date();
+        var nowDate = now.getFullYear()+""+now.getMonth()+""+now.getDay();
+        var t2m = this.response.features[0].properties.parameter.T2M;
+        //have to turn the returned data into an array and access first item in array to make data readable
+        console.log(Object.values(t2m)[0]);
+    }
+    //creating date variable
+    var now = new Date();
+    var nowDate = now.getFullYear()+""+now.getMonth()+""+now.getDay();
+    console.log(nowDate);
+    console.log(coord.lat,coord.lng);
+    //requesting information from today @ clicked lat and long thru api
+    var urlToRequest =   "https://power.larc.nasa.gov/cgi-bin/v1/DataAccess.py?request=execute&identifier=SinglePoint&parameters=T2M&";
+    urlToRequest += "startDate=" + nowDate;
+    urlToRequest += "&endDate="+ nowDate;
+    urlToRequest += "&userCommunity=SSE&tempAverage=DAILY&outputList=JSON,ASCII&";
+    urlToRequest += "lat=" + coord.lat + "&lon=" + coord.lng + "&user=anonymous";
+
+    //allowing us to send request
+    var oReq = new XMLHttpRequest();
+    oReq.responseType = 'json';
+
+    oReq.addEventListener("load", reqListener);
+    oReq.open("GET", urlToRequest);
+    oReq.send();
+
+
   });
+
+
 }
 
 
