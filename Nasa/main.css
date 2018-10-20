@@ -1,12 +1,84 @@
-body
+*
 {
-            padding: 0;
-            margin: 0;
-            /*hello*/
+    padding: 0;
+    margin: 0;
 }
 
-.test{
-	 max-width: 100%;
-     max-height: 98vh;
-     margin: auto;
+body{
+		overflow:hidden;
+
 }
+div{
+	padding: 0;
+	margin: 0;
+}
+
+p{
+	color:white;
+	font-size:1em;
+	font-family: Kollektif, Cambria ,serif;
+}
+
+#left{
+	position:absolute;
+	height:100%;
+	width:55%;
+	background-color:#FFFFFF;
+}
+
+
+#right{
+	position:absolute;
+	height:100%;
+	width:45%;
+	right:0;
+	background-color:#c6e5d9;
+}
+
+
+#right #refugees{
+	margin-top: 10%;
+    position: absolute;
+    width: 70%;
+    overflow: hidden;
+    right: 40%;
+}
+
+#right #sec1{
+	top: 46%;
+    position: absolute;
+	    height: 64%;
+    width: 100%;
+}
+
+#right #sec2{
+	top:70%;
+	position:absolute;
+}
+
+.subsec{
+	width: 100%;
+    position: absolute;
+	
+}
+
+.title{
+	z-index:1000;
+	color: white;
+	position:absolute;
+	margin-right:3%;
+	margin-top:1%;
+	right:0;
+	font-size:6em;
+	font-family: Kollektif, Cambria ,serif;
+}
+
+.title2{
+	z-index:1000;
+	color: white;
+	position:absolute;
+	margin-left:3%;
+	font-size:3em;
+	font-family: Kollektif, Cambria ,serif;
+}
+
