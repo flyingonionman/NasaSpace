@@ -72,7 +72,7 @@
 <div id="bottom">
 	<div id="return">Return</div>	
 	
-	<div id="icon"></div>
+	<div id="icon" ><img id="symbol" src=""></img></div>
 	
 	<div id="info">
 	<p>NUTRITIONAL INFO - 100 grams</p>
@@ -111,20 +111,24 @@
 		<td><data id="maturation">xxxx</data></td> 
 		</tr>
 	  <tr>
-		<td>Cost</td>
-		<td><data id="cost">xxxx</data></td> 
+		<td>Yield</td>
+		<td><data id="yield">xxxx</data></td> 
 	  </tr>
 	  <tr>
 		<td>Description</td>
 		<td><data id="description">xxxx</data></td> 
+		  
 	  </tr>
+	  <tr>
+		<td><a href="">Printable</a></td>		  
+	  </tr>	
 	</table>
 	</div>	
 </div>
 	
 	
 <script  type="text/javascript" charset="UTF-8" >
-var bestVeg =[];
+var bestVeg ;
     var temp=null;
 /**
  * An event listener is added to listen to tap events on the map.
@@ -186,6 +190,7 @@ function setUpClickListener(map) {
     //parses through the data received to get t2m's temperature value
     var pickedVeg = [];
     function reqListener2 () {
+		var holder =0;
         var now = new Date();
         var dateMin = (now.getFullYear()-1)+""+now.getMonth()+""+(now.getDay()+1);
         var dateMax = (now.getFullYear()-1)+""+(now.getMonth()+1)+""+(now.getDay()+1);
@@ -207,9 +212,11 @@ function setUpClickListener(map) {
                 if(temp>vegetables[i].absmin && temp<vegetables[i].absmax && avgprec>vegetables[i].watermin && avgprec<vegetables[i].watermax){
 					
                     pickedVeg.push(vegetables[i]);
-                    if(temp>vegetables[i].optmin && temp<vegetables[i].optmax){
-                        bestVeg.push(vegetables[i]);
-                        console.log('Best veg: '+ vegetables[i].name )
+					console.log(' veg: '+ vegetables[i].name );		
+
+                    if((temp-vegetables[i].absmin)>=holder && temp<vegetables[i].optmax){
+                        bestVeg=vegetables[i];
+                        console.log('Best veg: '+ vegetables[i].name );
                     }
 					
                 }
@@ -366,8 +373,8 @@ function myFunction(xml) {
   var xmlDoc = xml.responseXML;
   var x = xmlDoc.getElementsByTagName("PLANT");
   for (i = 0; i <x.length; i++) { 
-	  if (x[i].getElementsByTagName("NAME")[0].childNodes[0].nodeValue == String(bestVeg[0].name))
-		  {
+	  if (x[i].getElementsByTagName("NAME")[0].childNodes[0].nodeValue == String(bestVeg.name))
+	  		{
 			document.getElementById("calory").innerHTML =x[i].getElementsByTagName("CALORIES")[0].childNodes[0].nodeValue;
 			document.getElementById("fat").innerHTML = x[i].getElementsByTagName("FAT")[0].childNodes[0].nodeValue;
 			document.getElementById("protein").innerHTML= x[i].getElementsByTagName("PROTEIN")[0].childNodes[0].nodeValue;
@@ -376,11 +383,28 @@ function myFunction(xml) {
 			document.getElementById("tfat").innerHTML= x[i].getElementsByTagName("TRANS")[0].childNodes[0].nodeValue;
 			document.getElementById("fibre").innerHTML=	x[i].getElementsByTagName("FIBRE")[0].childNodes[0].nodeValue;
 			document.getElementById("maturation").innerHTML= x[i].getElementsByTagName("MATURATION")[0].childNodes[0].nodeValue;
-			document.getElementById("cost").innerHTML= x[i].getElementsByTagName("COST")[0].childNodes[0].nodeValue;
+			document.getElementById("yield").innerHTML= x[i].getElementsByTagName("YIELD")[0].childNodes[0].nodeValue;
 			document.getElementById("description").innerHTML=x[i].getElementsByTagName("DESCRIPTION")[0].childNodes[0].nodeValue;
-		  }  
-  	  }
-  }	
+			
+			if (String(bestVeg.name) == "corn"){
+				document.getElementById("symbol").src = "Images/corn.png";
+			}
+
+			else if (String(bestVeg.name)== "onion"){
+				document.getElementById("symbol").src = "Images/onion.jpeg";
+			} 
+			else if (String(bestVeg.name)== "spinach"){
+				document.getElementById("symbol").src = "Images/spinach.jpg";
+			}   	
+			else if (String(bestVeg.name)== "okra"){
+				document.getElementById("symbol").src = "Images/okra.jpg";
+			}   	
+						
+		}
+ 
+  	}  
+}
+	
 
 </script>
 </body>

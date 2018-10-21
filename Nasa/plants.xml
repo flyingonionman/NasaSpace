@@ -10,7 +10,7 @@
 	<SATURATED>1.1 grams</SATURATED>
 	<TRANS>0</TRANS>
 	<MATURATION>60 days</MATURATION>
-	<COST>206$ per acre</COST>
+	<YIELD>56 pounds per acre</YIELD>
 	<DESCRIPTION>Maize (/meɪz/ MAYZ; Zea mays subsp. mays, from Spanish: maíz after Taino: mahiz), also known as corn, is a cereal grain first domesticated by indigenous peoples in southern Mexico about 10,000 years ago.[1][2] The leafy stalk of the plant produces pollen inflorescences and separate ovuliferous inflorescences called ears that yield kernels or seeds, which are fruits.</DESCRIPTION>
 </PLANT>
 <PLANT>
@@ -22,6 +22,10 @@
 	<FAT>3.375 KJ</FAT>
 	<SATURATED>0.1 grams</SATURATED>
 	<TRANS>0</TRANS>
+	<MATURATION>6 to 8 weeks</MATURATION>
+	<YIELD>15,000 pounds per acre</YIELD>	
+	<DESCRIPTION>Spinach (Spinacia oleracea) is an edible flowering plant in the family Amaranthaceae native to central and western Asia. Its leaves are commonly eaten as a vegetable, either fresh, frozen, canned, chipped, or dehydrated.
+	</DESCRIPTION>	
 </PLANT>
 <PLANT>
 	<NAME>spinach</NAME>
@@ -32,6 +36,9 @@
 	<FAT>14 KJ</FAT>
 	<SATURATED>0</SATURATED>
 	<TRANS>0</TRANS>
+	<MATURATION>6 to 8 weeks</MATURATION>
+	<YIELD>15,000 pounds per acre</YIELD>	
+	<DESCRIPTION>Spinach (Spinacia oleracea) is an edible flowering plant in the family Amaranthaceae native to central and western Asia. Its leaves are commonly eaten as a vegetable, either fresh, frozen, canned, chipped, or dehydrated </DESCRIPTION>
 </PLANT>
 <PLANT>
 	<NAME>okra</NAME>
@@ -42,6 +49,10 @@
 	<FAT>7.375 KJ</FAT>
 	<SATURATED>0</SATURATED>
 	<TRANS>0</TRANS>
+	<MATURATION>3 to 4 weeks</MATURATION>
+	<YIELD>15 pounds of seed per acre</YIELD>	
+	<DESCRIPTION>kra or okro (US: /ˈoʊkrə/, UK: /ˈɒkrə/), known in many English-speaking countries as ladies' fingers or ochro, is a flowering plant in the mallow family. It is valued for its edible green seed pods. The geographical origin of okra is disputed, with supporters of West African, Ethiopian, and South Asian origins. The plant is cultivated in tropical, subtropical and warm temperate regions around the world.
+	</DESCRIPTION>	
 </PLANT>
 
 
