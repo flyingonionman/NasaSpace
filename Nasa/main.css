@@ -54,9 +54,9 @@ hr{
 }
 
 #left #sec3{
-	bottom: 8%;
+	bottom: 4%;
     width: 80%;
-    margin-left: 25%;
+    margin-left: 10%;
 	
 }
 
@@ -169,10 +169,25 @@ hr{
 	cursor: pointer;
 }
 
+#results{
+	position: absolute;
+    font-size: 3em;
+    right: 0;
+    opacity: 0;
+	transition-duration:.5s;
+}
+
 #return:hover{
 	cursor: pointer;
 }
 
+#return{
+	position: absolute;
+    z-index: 1000;
+    font-family: kollectif;
+    padding: 2px;
+    background-color: white;
+}
 #bottom{
 	top:100%;	
 	transition-duration:2s;

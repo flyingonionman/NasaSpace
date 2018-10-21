@@ -25,15 +25,13 @@
 		</div>
 		
 		<div class="subsec" id="sec3">
-			<div id="search">Search</div>
-			<div id="results">Results</div>
+			<div id="results" onclick="loadDoc()">Results</div>
 			<p>
-				-Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-				sed do eiusmod tempor incididunt ut labore et dolore 
-				magna aliqua. Ut enim ad minim veniam, quis nostrud 
-				exercitation ullamco laboris nisi ut aliquip ex ea commodo 
-				consequat. Duis aute irure dolor in reprehenderit in 
-				voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+				Click on the map near the settlement you want to analyze.
+				Wait for the analysis of temperature/precipation. It will take some time.
+				A recommended vegetation will pop up based on the collected data, if
+				it does not, choose a different point on the map.(It could be that 
+				the place gets no rain at all)
 			</p>
 		</div>
 		
@@ -106,19 +104,27 @@
 	</div>
 	
 	<div id ="analysis">
-	<p>
-	Time until maturity: asdfasdfsadf
-	Cost:  sadfsadfasfasdf
-	Advice: 	Plant in the autumn and harvest before summer 
-		- can be used to make such and such, a staple food in somewhere
-	</p>
+	<table style="width:90%">
+		
+	  <tr>
+		<td>Time until Maturation</td>
+		<td><data id="maturation">xxxx</data></td> 
+		</tr>
+	  <tr>
+		<td>Cost</td>
+		<td><data id="cost">xxxx</data></td> 
+	  </tr>
+	  <tr>
+		<td>Description</td>
+		<td><data id="description">xxxx</data></td> 
+	  </tr>
+	</table>
 	</div>	
 </div>
 	
 	
 <script  type="text/javascript" charset="UTF-8" >
-    
-   
+var bestVeg =[];
     var temp=null;
 /**
  * An event listener is added to listen to tap events on the map.
@@ -137,27 +143,25 @@ function setUpClickListener(map) {
     //parses through the data received to get t2m's temperature value
     function reqListener () {
         var now = new Date();
-        var nowDate = now.getFullYear()+""+now.getMonth()+""+now.getDay();
+        var nowDate = now.getFullYear()+""+now.getMonth()+""+(now.getDay()+1);
+        console.log(nowDate);
         var t2m = this.response.features[0].properties.parameter.T2M;
         //have to turn the returned data into an array and access first item in array to make data readable
         temp = Object.values(t2m)[0];
         console.log("load complete");
         doSomethingWithValue(temp);
     }
-
-    var pickedVeg = [];
     
     function doSomethingWithValue(tempThatWasLoaded) {
         console.log(tempThatWasLoaded);
         oReq2.send();
         console.log("Starting load for precip with temp of", temp);
-            //telling you what vegetables r good
-   
+        
     }
 
     //creating date variable
     var now = new Date();
-    var nowDate = now.getFullYear()+""+now.getMonth()+""+now.getDay();
+    var nowDate = now.getFullYear()+""+now.getMonth()+""+(now.getDay()+1);
     console.log(nowDate);
     console.log(coord.lat,coord.lng);
     //requesting information from today @ clicked lat and long thru api
@@ -180,19 +184,18 @@ function setUpClickListener(map) {
     //PRECIPITATION
     //doing it all again with precipitation
     //parses through the data received to get t2m's temperature value
+    var pickedVeg = [];
     function reqListener2 () {
         var now = new Date();
-        var dateMin = (now.getFullYear()-1)+""+now.getMonth()+""+now.getDay();
-        var dateMax = (now.getFullYear()-1)+""+(now.getMonth()+1)+""+now.getDay();
+        var dateMin = (now.getFullYear()-1)+""+now.getMonth()+""+(now.getDay()+1);
+        var dateMax = (now.getFullYear()-1)+""+(now.getMonth()+1)+""+(now.getDay()+1);
+        console.log(dateMin + '    ' + dateMax);
         var prec = this.response.features[0].properties.parameter.PRECTOT;
         //create average of precips
         var sumprec = 0;
         for (i = 0; i < 20; i++) {
                 sumprec+=Object.values(prec)[i];
             }
-        var avgprec = sumprec/20;
-            //have to turn the returned data into an array and access first item in array to make data readable
-        console.log(avgprec);
         var avgprec = (sumprec/20)*0.0393701*7;
         console.log("percip load complete, do i still have temp?");
 
@@ -202,18 +205,24 @@ function setUpClickListener(map) {
         function pickVeg () {
         for (i = 0; i < vegetables.length; i++) {
                 if(temp>vegetables[i].absmin && temp<vegetables[i].absmax && avgprec>vegetables[i].watermin && avgprec<vegetables[i].watermax){
-                    console.log(vegetables[i].name)
+					
                     pickedVeg.push(vegetables[i]);
+                    if(temp>vegetables[i].optmin && temp<vegetables[i].optmax){
+                        bestVeg.push(vegetables[i]);
+                        console.log('Best veg: '+ vegetables[i].name )
+                    }
+					
                 }
             }
-    }
+    	}
+	document.getElementById("results").style.opacity="1";
     pickVeg();
-
+	
     }
     //creating date variable
     var now2 = new Date();
-        var dateMin = (now2.getFullYear()-1)+""+now2.getMonth()+""+now2.getDay();
-        var dateMax = (now2.getFullYear()-1)+""+(now2.getMonth()+1)+""+now2.getDay();
+        var dateMin = (now2.getFullYear()-1)+""+now2.getMonth()+""+(now2.getDay()+1);
+        var dateMax = (now2.getFullYear()-1)+""+(now2.getMonth()+1)+""+(now2.getDay()+1);
     //requesting information from today @ clicked lat and long thru api
     var urlToRequest2 =   "https://power.larc.nasa.gov/cgi-bin/v1/DataAccess.py?request=execute&identifier=SinglePoint&parameters=PRECTOT&";
     urlToRequest2 += "startDate=" + dateMin;
@@ -226,17 +235,9 @@ function setUpClickListener(map) {
     oReq2.responseType = 'json';
     oReq2.addEventListener("load", reqListener2);
     oReq2.open("GET", urlToRequest2);
-    oReq2.send();
-
-
-    //allowing us to send request
-    var oReq2 = new XMLHttpRequest();
-    oReq2.responseType = 'json';
-    oReq2.addEventListener("load", reqListener2);
-    oReq2.open("GET", urlToRequest2);
   });
 
-
+   
 }
 
 
@@ -293,7 +294,7 @@ var onion = {
     optmax: 25,
     growthmin: 100,
     growthmax: 175,
-    watermin: 0.2,
+    watermin: 0.3,
     watermax: 3
 }
 
@@ -346,6 +347,41 @@ var okra = {
 }
 var vegetables = [corn,onion,tomato,gb,spinach,okra];
 //END OF UGLY VEGETABLES
+function loadDoc() {
+document.getElementById("results").style.opacity="0";	
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    myFunction(this);
+    }
+  };
+  xhttp.open("GET", "plants.xml", true);
+  xhttp.send();
+
+}
+
+	
+function myFunction(xml) {
+  var i;	
+  var xmlDoc = xml.responseXML;
+  var x = xmlDoc.getElementsByTagName("PLANT");
+  for (i = 0; i <x.length; i++) { 
+	  if (x[i].getElementsByTagName("NAME")[0].childNodes[0].nodeValue == String(bestVeg[0].name))
+		  {
+			document.getElementById("calory").innerHTML =x[i].getElementsByTagName("CALORIES")[0].childNodes[0].nodeValue;
+			document.getElementById("fat").innerHTML = x[i].getElementsByTagName("FAT")[0].childNodes[0].nodeValue;
+			document.getElementById("protein").innerHTML= x[i].getElementsByTagName("PROTEIN")[0].childNodes[0].nodeValue;
+			document.getElementById("sfat").innerHTML= x[i].getElementsByTagName("SATURATED")[0].childNodes[0].nodeValue;
+			document.getElementById("sugar").innerHTML= x[i].getElementsByTagName("SUGAR")[0].childNodes[0].nodeValue;
+			document.getElementById("tfat").innerHTML= x[i].getElementsByTagName("TRANS")[0].childNodes[0].nodeValue;
+			document.getElementById("fibre").innerHTML=	x[i].getElementsByTagName("FIBRE")[0].childNodes[0].nodeValue;
+			document.getElementById("maturation").innerHTML= x[i].getElementsByTagName("MATURATION")[0].childNodes[0].nodeValue;
+			document.getElementById("cost").innerHTML= x[i].getElementsByTagName("COST")[0].childNodes[0].nodeValue;
+			document.getElementById("description").innerHTML=x[i].getElementsByTagName("DESCRIPTION")[0].childNodes[0].nodeValue;
+		  }  
+  	  }
+  }	
+
 </script>
 </body>
 </html>

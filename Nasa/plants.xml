@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CATALOG>
+<PLANT>
+	<NAME>corn</NAME>
+	<CALORIES>365.06 KJ</CALORIES>
+	<PROTEIN>155.85 KJ</PROTEIN>
+	<SUGAR>1.1 grams</SUGAR>
+	<FIBRE>12.1 grams</FIBRE>
+	<FAT>240.21 KJ</FAT>
+	<SATURATED>1.1 grams</SATURATED>
+	<TRANS>0</TRANS>
+	<MATURATION>60 days</MATURATION>
+	<COST>206$ per acre</COST>
+	<DESCRIPTION>Maize (/meɪz/ MAYZ; Zea mays subsp. mays, from Spanish: maíz after Taino: mahiz), also known as corn, is a cereal grain first domesticated by indigenous peoples in southern Mexico about 10,000 years ago.[1][2] The leafy stalk of the plant produces pollen inflorescences and separate ovuliferous inflorescences called ears that yield kernels or seeds, which are fruits.</DESCRIPTION>
+</PLANT>
+<PLANT>
+	<NAME>onion</NAME>
+	<CALORIES>167.5 KJ</CALORIES>
+	<PROTEIN>12.81 KJ</PROTEIN>
+	<SUGAR>6.8 grams</SUGAR>
+	<FIBRE>2.7 grams</FIBRE>
+	<FAT>3.375 KJ</FAT>
+	<SATURATED>0.1 grams</SATURATED>
+	<TRANS>0</TRANS>
+</PLANT>
+<PLANT>
+	<NAME>spinach</NAME>
+	<CALORIES>96.3 KJ</CALORIES>
+	<PROTEIN>29.304 KJ</PROTEIN>
+	<SUGAR>0.33 grams</SUGAR>
+	<FIBRE>2.33 grams</FIBRE>
+	<FAT>14 KJ</FAT>
+	<SATURATED>0</SATURATED>
+	<TRANS>0</TRANS>
+</PLANT>
+<PLANT>
+	<NAME>okra</NAME>
+	<CALORIES>92.13 KJ</CALORIES>
+	<PROTEIN>19.375 KJ</PROTEIN>
+	<SUGAR>2.375 grams</SUGAR>
+	<FIBRE>25 grams</FIBRE>
+	<FAT>7.375 KJ</FAT>
+	<SATURATED>0</SATURATED>
+	<TRANS>0</TRANS>
+</PLANT>
+
+
+</CATALOG>
