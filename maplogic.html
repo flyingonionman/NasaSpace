@@ -30,7 +30,8 @@ function setUpClickListener(map) {
     //parses through the data received to get t2m's temperature value
     function reqListener () {
         var now = new Date();
-        var nowDate = now.getFullYear()+""+now.getMonth()+""+now.getDay();
+        var nowDate = now.getFullYear()+""+now.getMonth()+""+(now.getDay()+1);
+        console.log(nowDate);
         var t2m = this.response.features[0].properties.parameter.T2M;
         //have to turn the returned data into an array and access first item in array to make data readable
         temp = Object.values(t2m)[0];
@@ -56,7 +57,7 @@ function setUpClickListener(map) {
 
     //creating date variable
     var now = new Date();
-    var nowDate = now.getFullYear()+""+now.getMonth()+""+now.getDay();
+    var nowDate = now.getFullYear()+""+now.getMonth()+""+(now.getDay()+1);
     console.log(nowDate);
     console.log(coord.lat,coord.lng);
     //requesting information from today @ clicked lat and long thru api
@@ -83,8 +84,9 @@ function setUpClickListener(map) {
     var bestVeg = [];
     function reqListener2 () {
         var now = new Date();
-        var dateMin = (now.getFullYear()-1)+""+now.getMonth()+""+now.getDay();
-        var dateMax = (now.getFullYear()-1)+""+(now.getMonth()+1)+""+now.getDay();
+        var dateMin = (now.getFullYear()-1)+""+now.getMonth()+""+(now.getDay()+1);
+        var dateMax = (now.getFullYear()-1)+""+(now.getMonth()+1)+""+(now.getDay()+1);
+        console.log(dateMin + '    ' + dateMax);
         var prec = this.response.features[0].properties.parameter.PRECTOT;
         //create average of precips
         var sumprec = 0;
@@ -113,8 +115,8 @@ function setUpClickListener(map) {
     }
     //creating date variable
     var now2 = new Date();
-        var dateMin = (now2.getFullYear()-1)+""+now2.getMonth()+""+now2.getDay();
-        var dateMax = (now2.getFullYear()-1)+""+(now2.getMonth()+1)+""+now2.getDay();
+        var dateMin = (now2.getFullYear()-1)+""+now2.getMonth()+""+(now2.getDay()+1);
+        var dateMax = (now2.getFullYear()-1)+""+(now2.getMonth()+1)+""+(now2.getDay()+1);
     //requesting information from today @ clicked lat and long thru api
     var urlToRequest2 =   "https://power.larc.nasa.gov/cgi-bin/v1/DataAccess.py?request=execute&identifier=SinglePoint&parameters=PRECTOT&";
     urlToRequest2 += "startDate=" + dateMin;
