@@ -9,6 +9,7 @@
 <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
 <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
 <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+<script src="https://cdn.rawgit.com/kimmobrunfeldt/progressbar.js/0.5.6/dist/progressbar.js"></script>																																																																			
 <script src="haha.js"></script>
 
 </head>
@@ -210,6 +211,7 @@ function setUpClickListener(map) {
 					console.log(' veg: '+ vegetables[i].name );		
 
                     if((temp-vegetables[i].absmin)>=holder && temp<vegetables[i].optmax){
+						holder= (temp-vegetables[i].absmin);
                         bestVeg=vegetables[i];
                         console.log('Best veg: '+ vegetables[i].name );
                     }

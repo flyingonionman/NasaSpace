@@ -35,6 +35,8 @@ hr{
 
 #left #map{
 
+	
+	
     margin-left: auto;
     margin-right: auto;
     margin-top: 12%;
@@ -50,17 +52,17 @@ hr{
 	color:black;
 	width:100%;
 	margin-left:0;
+	line-height:40px;
 }
 
 #left #sec3{
 	bottom: 4%;
-    width: 80%;
-    margin-left: 10%;
+    width: 100%;
 	
 }
 
 #left #sec4{
-	 top: 4%;
+	 top:0%;
     text-align: center;
     width: 100%;
     margin-left: 0;
@@ -256,7 +258,7 @@ table{
     margin-top: 1%;
     margin-right: auto;
     font-family: kollektif,serif;
-	font-size:1.5em;
+	font-size:1.1em;
 }
 
 #symbol{
