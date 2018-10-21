@@ -19,39 +19,60 @@ p{
 	font-family: Kollektif, Cambria ,serif;
 }
 
+hr{
+	border-style: solid;
+}
+
 #left{
 	position:absolute;
 	height:100%;
-	width:55%;
+	width:63%;
 	background-color:#FFFFFF;
+	margin-left:19%;
+	transition-duration:1s;
 }
 
-#left #maps{
-	position: absolute;
-    background-color: grey;
-    width: 80%;
-    height: 71%;
-    margin-top: 4.5%;
-    margin-left: 6%;
+
+#left #map{
+	width: 400px;
+    height: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 12%;
+    display: block;
+    background: grey;
 }
 
 #left #search{
-	
+	font-size:3em;
 }
 
 #left p{
 	color:black;
+	width:60%;
+	margin-left:0;
 }
 
 #left #sec3{
-	top:60%;	
+	bottom: 8%;
+    width: 80%;
+    margin-left: 25%;
+	
+}
+
+#left #sec4{
+	top: 4%;	
+	text-align:center;
+    width: 80%;
+    margin-left: 25%;
 	
 }
 #right{
 	position:absolute;
 	height:100%;
-	width:45%;
+	width:39%;
 	right:0;
+	transition-duration: 1s;
 	background-color:#c6e5d9;
 }
 
@@ -76,6 +97,23 @@ p{
 	position:absolute;
 }
 
+#right #flash{
+	top: 31%;
+}
+
+.mapextend{
+	width:100;
+}
+
+.closed{
+	    margin-right: -50%;
+	
+}
+
+.open{
+	margin-right:0;
+	
+}
 .subsec{
 	width: 100%;
     position: absolute;
@@ -84,10 +122,11 @@ p{
 
 .subsec p{
 	padding: 7px;
-    margin-left: 7%;
-    margin-top: 2%;
+    margin-top: 1%;
     margin-bottom: 2%;
+	margin-left:14%;
     width: 80%;
+	color: black
 }
 .title{
 	z-index:1000;
@@ -96,7 +135,7 @@ p{
 	margin-right:3%;
 	margin-top:1%;
 	right:0;
-	font-size:6em;
+	font-size:5.5em;
 	font-family: Kollektif, Cambria ,serif;
 }
 
@@ -104,9 +143,104 @@ p{
 	z-index:1000;
 	color: white;
 	position:relative;
-	margin-left:3%;
-	font-size:3em;
+	margin-left: 5%;
+    font-size: 2em;
 	font-family: Kollektif, Cambria ,serif;
 }
 
+#arrow{
+	height:40px;
+	width:40px;
+    margin-left: -35%;
+    margin-top: 2%;
+	transition-duration: .35s;
+}
 
+#arrow:hover { 
+	cursor: pointer;
+}
+
+.faceright{
+	margin-left: -17%;
+	transform:rotate(180deg);
+}
+
+#results:hover{
+	cursor: pointer;
+}
+
+#return:hover{
+	cursor: pointer;
+}
+
+#bottom{
+	top:100%;	
+	transition-duration:2s;
+	width: 100%;
+	height: 100%;	
+	position: absolute;
+	background-image:url("Images/benjamin-davies-260884-unsplash.jpg");
+	background-repeat: no-repeat;
+	background-position:center;
+	background-size: cover;
+	opacity: 0.75;
+}
+
+#big{
+	transition-duration:2s;
+	bottom: 0%;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+#info{
+	background-color: #C6e5d9;
+    top: 10%;
+    position: absolute;
+    height: 290px;
+    width: 50%;
+    margin-left:40%;
+}
+
+#info p{
+	font-size: 3em;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#icon{
+	background-color: #C6e5d9;
+    top: 10%;
+    position: absolute;
+    height: 290px;
+    width: 26%;
+    margin-left: 10%;
+}
+
+
+#analysis{
+	background-color: #C6e5d9;
+    bottom: 10%;
+    position: absolute;
+    height: 290px;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+td {
+    height: 50px;
+    vertical-align: center;
+}
+
+
+table{
+	position: relative;
+    margin-left: auto;
+    width: 90%;
+    margin-top: 1%;
+    margin-right: auto;
+    font-family: kollektif,serif;
+	font-size:1.5em;
+}
