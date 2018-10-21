@@ -12,7 +12,7 @@
 <body>
   <div id="map" style="width: 100%; height: 400px; background: grey" />
   <script  type="text/javascript" charset="UTF-8" >
-    
+    var temp=null;
 /**
  * An event listener is added to listen to tap events on the map.
  * Clicking on the map displays an alert box containing the latitude and longitude
@@ -25,15 +25,7 @@ function setUpClickListener(map) {
   map.addEventListener('tap', function (evt) {
     var coordx = evt.currentPointer.viewportX;
     var coordy = evt.currentPointer.viewportY;
-    var coord = map.screenToGeo(coordx,
-            coordy);
-   //gives NSEW coords
-    var realcoord = Math.abs(coord.lat.toFixed(4)) +
-        ((coord.lat > 0) ? 'N' : 'S') +
-        ' ' + Math.abs(coord.lng.toFixed(4)) +
-         ((coord.lng > 0) ? 'E' : 'W');
-
-    alert('Clicked at ' + coord);
+    var coord = map.screenToGeo(coordx,coordy);
 
     //parses through the data received to get t2m's temperature value
     function reqListener () {
@@ -41,8 +33,29 @@ function setUpClickListener(map) {
         var nowDate = now.getFullYear()+""+now.getMonth()+""+now.getDay();
         var t2m = this.response.features[0].properties.parameter.T2M;
         //have to turn the returned data into an array and access first item in array to make data readable
-        console.log(Object.values(t2m)[0]);
+        temp = Object.values(t2m)[0];
+        console.log("load complete");
+        doSomethingWithValue(temp);
     }
+
+    var pickedVeg = [];
+    
+    function doSomethingWithValue(tempThatWasLoaded) {
+        console.log(tempThatWasLoaded);
+        oReq2.send();
+        console.log("Starting load for precip with temp of", temp);
+            //telling you what vegetables r good
+    /*function pickVeg () {
+        for (i = 0; i < vegetables.length; i++) {
+                if(temp>vegetables[i].absmin && temp<vegetables[i].absmax){
+                    console.log(vegetables[i].name)
+                    pickedVeg.push(vegetables[i]);
+                }
+            }
+    }
+    pickVeg();*/
+    }
+
     //creating date variable
     var now = new Date();
     var nowDate = now.getFullYear()+""+now.getMonth()+""+now.getDay();
@@ -60,6 +73,7 @@ function setUpClickListener(map) {
     oReq.responseType = 'json';
     oReq.addEventListener("load", reqListener);
     oReq.open("GET", urlToRequest);
+    console.log("Starting load");
     oReq.send();
 
     
@@ -77,9 +91,22 @@ function setUpClickListener(map) {
         for (i = 0; i < 20; i++) {
                 sumprec+=Object.values(prec)[i];
             }
-        var avgprec = sumprec/20;
+        var avgprec = (sumprec/20)*0.0393701*7;
+        console.log("percip load complete, do i still have temp?");
+
             //have to turn the returned data into an array and access first item in array to make data readable
-        console.log(avgprec);
+        console.log("Precip = "+ avgprec);
+
+        function pickVeg () {
+        for (i = 0; i < vegetables.length; i++) {
+                if(temp>vegetables[i].absmin && temp<vegetables[i].absmax && avgprec>vegetables[i].watermin && avgprec<vegetables[i].watermax){
+                    console.log(vegetables[i].name)
+                    pickedVeg.push(vegetables[i]);
+                }
+            }
+    }
+    pickVeg();
+
     }
     //creating date variable
     var now2 = new Date();
@@ -97,9 +124,6 @@ function setUpClickListener(map) {
     oReq2.responseType = 'json';
     oReq2.addEventListener("load", reqListener2);
     oReq2.open("GET", urlToRequest2);
-    oReq2.send();
-
-
   });
 
 
@@ -137,6 +161,81 @@ var map = new H.Map(document.getElementById('map'),
 var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 
 setUpClickListener(map);
+
+//HERE IS THE UGLY CODE WITH ALL THE VEGETABLE
+var corn = {
+    name: 'corn',
+    absmin: 10,
+    absmax: 47,
+    optmin: 18,
+    optmax: 33,
+    growthmin: 60,
+    growthmax: 100,
+    watermin: 1,
+    watermax: 3
+}
+
+var onion = {
+    name: 'onion',
+    absmin: 12.8,
+    absmax: 40,
+    optmin: 20,
+    optmax: 25,
+    growthmin: 100,
+    growthmax: 175,
+    watermin: 0.2,
+    watermax: 3
+}
+
+var tomato = {
+    name: 'tomato',
+    absmin: 15.5,
+    absmax: 35,
+    optmin: 20,
+    optmax: 27,
+    growthmin: 40,
+    growthmax: 50,
+    watermin: 1,
+    watermax: 2
+}
+
+var gb = {
+    name: 'green beans',
+    absmin: 15.5,
+    absmax: 28,
+    optmin: 21,
+    optmax: 26.5,
+    growthmin: 45,
+    growthmax: 65,
+    watermin: 1,
+    watermax: 2
+}
+
+var spinach = {
+    name: 'spinach',
+    absmin: 0,
+    absmax: 24,
+    optmin: 18,
+    optmax: 24,
+    growthmin: 55,
+    growthmax: 65,
+    watermin: .4,
+    watermax: 1.5
+}
+
+var okra = {
+    name: 'okra',
+    absmin: 15.5,
+    absmax: 40.5,
+    optmin: 29.4,
+    optmax: 35,
+    growthmin: 50,
+    growthmax: 65,
+    watermin: 1,
+    watermax: 2
+}
+var vegetables = [corn,onion,tomato,gb,spinach,okra];
+//END OF UGLY VEGETABLES
   </script>
 </body>
 </html>
