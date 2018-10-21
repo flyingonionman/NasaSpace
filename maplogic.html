@@ -37,8 +37,6 @@ function setUpClickListener(map) {
         console.log("load complete");
         doSomethingWithValue(temp);
     }
-
-    var pickedVeg = [];
     
     function doSomethingWithValue(tempThatWasLoaded) {
         console.log(tempThatWasLoaded);
@@ -81,6 +79,8 @@ function setUpClickListener(map) {
     //PRECIPITATION
     //doing it all again with precipitation
     //parses through the data received to get t2m's temperature value
+    var pickedVeg = [];
+    var bestVeg = [];
     function reqListener2 () {
         var now = new Date();
         var dateMin = (now.getFullYear()-1)+""+now.getMonth()+""+now.getDay();
@@ -91,11 +91,6 @@ function setUpClickListener(map) {
         for (i = 0; i < 20; i++) {
                 sumprec+=Object.values(prec)[i];
             }
-<<<<<<< HEAD
-        var avgprec = sumprec/20;
-            //have to turn the returned data into an array and access first item in array to make data readable
-        console.log(avgprec);
-=======
         var avgprec = (sumprec/20)*0.0393701*7;
         console.log("percip load complete, do i still have temp?");
 
@@ -107,12 +102,14 @@ function setUpClickListener(map) {
                 if(temp>vegetables[i].absmin && temp<vegetables[i].absmax && avgprec>vegetables[i].watermin && avgprec<vegetables[i].watermax){
                     console.log(vegetables[i].name)
                     pickedVeg.push(vegetables[i]);
+                    if(temp>vegetables[i].optmin && temp<vegetables[i].optmax){
+                        bestVeg.push(vegetables[i]);
+                        console.log('Best veg: '+ vegetables[i].name )
+                    }
                 }
             }
     }
     pickVeg();
-
->>>>>>> 5a242d854cfa94e2f284a09c41877c673c6d6c28
     }
     //creating date variable
     var now2 = new Date();
@@ -124,17 +121,6 @@ function setUpClickListener(map) {
     urlToRequest2 += "&endDate="+ dateMax;
     urlToRequest2 += "&userCommunity=SSE&tempAverage=DAILY&outputList=JSON,ASCII&";
     urlToRequest2 += "lat=" + coord.lat + "&lon=" + coord.lng + "&user=anonymous";
-<<<<<<< HEAD
-
-    //allowing us to send request
-    var oReq2 = new XMLHttpRequest();
-    oReq2.responseType = 'json';
-    oReq2.addEventListener("load", reqListener2);
-    oReq2.open("GET", urlToRequest2);
-    oReq2.send();
-
-=======
->>>>>>> 5a242d854cfa94e2f284a09c41877c673c6d6c28
 
     //allowing us to send request
     var oReq2 = new XMLHttpRequest();
@@ -200,7 +186,7 @@ var onion = {
     optmax: 25,
     growthmin: 100,
     growthmax: 175,
-    watermin: 0.2,
+    watermin: 0.3,
     watermax: 3
 }
 
